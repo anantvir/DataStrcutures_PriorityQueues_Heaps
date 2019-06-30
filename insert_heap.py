@@ -8,7 +8,7 @@ class MaxHeap:
     class Node:
         def __init__(self,item,parent =None,left_child = None,right_child = None):
             self._item = item
-            self._parent = parent
+            self._parent = parent                   # Parent, left and right not required in this implementation, although more information about the node can be included in place of them
             self._left_child = left_child
             self._right_child = right_child
     
