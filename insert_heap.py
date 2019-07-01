@@ -15,7 +15,7 @@ class MaxHeap:
     def __init__(self):
         self.TREE = []
 
-    """ IMPORTANT ! - for ease if implementation, heap tree's array index should start from 1 instead of 0, so None is inserted into TREE[0] position """
+    """ IMPORTANT ! - for ease of implementation, heap tree's array index should start from 1 instead of 0, so None is inserted into TREE[0] position """
     def insert_heap(self,item):
         if len(self.TREE) == 0:                         
             self.TREE.append(None)
@@ -35,27 +35,30 @@ class MaxHeap:
         return newNode
 
     def delete_heap(self):
+        item = self.TREE[1]
         last = self.TREE.pop(-1)
         size = len(self.TREE[1:])
         PTR, LEFT, RIGHT = 1,2,3
         while(RIGHT <= size):
             if last._item >= self.TREE[LEFT]._item and last._item >= self.TREE[RIGHT]._item:
                 self.TREE[PTR] = last
-                return
+                return item
             if self.TREE[LEFT]._item >= self.TREE[RIGHT]._item:
                 self.TREE[PTR] = self.TREE[LEFT]
                 PTR = LEFT
+                #self.TREE[PTR] = last
             else:
                 self.TREE[PTR] = self.TREE[RIGHT]
                 PTR = RIGHT
+                #self.TREE[PTR] = last
             LEFT = 2*PTR
             RIGHT = LEFT + 1
         
         if LEFT == size and last._item < self.TREE[LEFT]._item:
             self.TREE[PTR] = self.TREE[LEFT]
             PTR = LEFT
-            self.TREE[PTR] = last
-        return
+        self.TREE[PTR] = last
+        return item
 
 h = MaxHeap()
 h.insert_heap(95)
