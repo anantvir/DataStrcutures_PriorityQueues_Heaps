@@ -28,6 +28,33 @@ class Min_Heap:
         if ptr == 1:
             self.TREE[ptr] = newNode
         return newNode
+    
+    def delete_heap(self):
+        item = self.TREE[1]
+        last = self.TREE.pop(-1)
+        size = len(self.TREE[1:])
+        ptr = 1
+        left = 2 
+        right = 3
+        while right <= size:
+            if last.info <= self.TREE[left].info and last.info <= self.TREE[right].info:
+                self.TREE[ptr] = last
+                return last
+            if self.TREE[left].info <= self.TREE[right].info:
+                self.TREE[ptr] = self.TREE[left]
+                ptr= left
+            else:
+                self.TREE[ptr] = self.TREE[right]
+                ptr = right
+            left = 2*ptr
+            right = 2*ptr + 1
+        if left == size and last.info > self.TREE[left].info:
+            ptr = left
+            self.TREE[ptr] = last
+        return item
+            
+
+            
 
 
 h = Min_Heap()
@@ -43,3 +70,4 @@ h.insert_heap(15)
 h.insert_heap(20)
 h.insert_heap(15)
 h.insert_heap(22)
+h.delete_heap()
